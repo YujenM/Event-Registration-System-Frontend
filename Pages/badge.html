@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Badge</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        /* Add responsive styles */
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .badge-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .visitor-photo {
+            width: 40%;
+            height: 35%;
+            /* border-radius: 50%; */
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .visitor-name {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .visitor-label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .verified-icon {
+            width: 15vw;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .badge-card {
+                padding: 15px;
+            }
+
+            .visitor-photo {
+                width: 80px;
+                height: 80px;
+            }
+
+            .visitor-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="badge-container">
+        <div class="badge-card">
+            <img id="visitor-photo" class="visitor-photo" src="../image/Yujen.png" alt="Visitor Photo" />
+            <h2 id="visitor-name" class="visitor-name">Loading...</h2>
+            <p class="visitor-label">Visitor</p>
+            <img class="verified-icon" src="../image/verified.png" alt="Verified Badge" />
+        </div>
+    </div>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                fullName: params.get('fullName') || 'Unknown Visitor',
+                email: params.get('email') || 'Not provided',
+                phone: params.get('phone') || 'Not provided',
+                photoPath: params.get('photoPath') || ''
+                
+            };
+        }
+
+        window.onload = function () {
+            const { fullName, photoPath } = getQueryParams();
+
+            document.getElementById('visitor-name').textContent = fullName;
+            console.log(photoPath);
+
+            if (photoPath) {
+                document.getElementById('visitor-photo').src = `${photoPath}`;
+            }
+        };
+    </script>
+</body>
+</html>
